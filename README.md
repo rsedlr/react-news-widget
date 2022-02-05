@@ -1,6 +1,6 @@
 # React News Widget
 
-<!-- ![Demo Image](https://github.com/rsedlr/react-news-widget/blob/main/image.jpg?raw=true) -->
+![Demo Image](https://github.com/rsedlr/react-news-widget/blob/main/demoImage.png?raw=true)
 
 # How to run
 
