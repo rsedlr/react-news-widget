@@ -94,10 +94,8 @@ test('Links to articles are present', async () => {
 });
 
 // test('Links to articles are correct', async () => {
-//   render(<NewsWidget />);
-//   const articlesContainer = screen.getByTestId('articles');
-//   await waitForAPICall(articlesContainer);
-//
+//  // Other than making another API request in the test method and comparing the links I'm
+//  // not sure how to go about this, so I have left it out for now.
 // });
 
 test('Filter by Source dropdown is populated', async () => {

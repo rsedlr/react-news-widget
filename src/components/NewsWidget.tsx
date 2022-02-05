@@ -29,10 +29,10 @@ function NewsWidget() {
         `https://newsapi.org/v2/top-headlines?country=gb&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
       );
 
-      const json = await response.json(); // convert the data to json
+      const json = await response.json(); // Convert the data to json
 
       if (isMounted) {
-        setArticles(json.articles); // set state with the result
+        setArticles(json.articles); // Set state with the result
       }
     };
 
@@ -89,12 +89,12 @@ function NewsWidget() {
       </div>
       <div className='article-container' data-testid='articles'>
         {articles.map((article, i) => {
-          const titleSplit = article.title.split(' - '); //
-          const articleName = titleSplit.slice(0, -1);
-          const source = titleSplit.slice(-1)[0];
           // Article source is taken from the title (all titles appear to have the actual title and
           // source separated by a '-'). The source field provided by the API didn't match the design
           // document as well as this source does. For example, 'Sky News' was 'Sky.com'
+          const titleSplit = article.title.split(' - '); //
+          const articleName = titleSplit.slice(0, -1);
+          const source = titleSplit.slice(-1)[0];
 
           if (
             articleCount < resultLimit &&
