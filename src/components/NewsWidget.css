@@ -3,7 +3,7 @@
 :root {
   --main-pink: rgb(227, 66, 112);
   --main-grey: rgb(143, 143, 143);
-  --dropdown-grey: rgb(96, 96, 96);
+  --dropdown-grey: rgb(97, 97, 97);
   --background: rgb(249, 249, 249);
 }
 
@@ -16,14 +16,21 @@
 
 .flex-container {
   display: flex;
-  gap: 15px;
-  /* flex-wrap: nowrap; */
+  gap: 1.2rem;
 }
 
 .news-title {
   color: var(--main-pink);
-  text-decoration: underline;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.news-title:after {
+  content: '';
+  display: block;
+  height: 0.2rem;
+  width: 96%;
+  margin: 0.1rem auto;
+  background: var(--main-pink);
 }
 
 .news-dropdown {
@@ -32,14 +39,37 @@
   background-color: rgba(0, 0, 0, 0);
   border-radius: 5px;
   height: auto;
-  font-weight: bold;
-  padding: 0.1rem 0.25rem;
+  padding: 0.3rem 1.6rem 0.3rem 0.65rem;
+  text-align: center;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.dropdown-wrapper {
+  margin-left: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 0;
+}
+
+.dropdown-select-arrow-div {
+  position: relative;
+}
+.dropdown-select-arrow-div::after {
+  content: '▼';
+  color: var(--dropdown-grey);
+  font-size: 0.8rem;
+  pointer-events: none;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  z-index: 1;
 }
 
 .news-button {
   color: var(--main-pink);
   border: 2px solid var(--main-pink);
-  padding: 0.5rem;
+  padding: 0.45rem 0.55rem;
   font-weight: bold;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -51,8 +81,8 @@
 }
 
 .article {
-  border-bottom: 1.75px solid var(--main-grey);
-  margin-bottom: 0.5rem;
+  border-bottom: 1.75px dashed var(--main-grey);
+  margin-bottom: 0.75rem;
 }
 
 .article > a {
@@ -61,25 +91,22 @@
 }
 
 .article-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-weight: bold;
   margin-top: 0.5rem;
   margin-bottom: 0.2rem;
 }
 
 .article-source {
-  /* vertical-align: center; */
   color: white;
-  padding: 0.1rem 0.4rem;
+  padding: 0.075rem 0.6rem 0.15rem;
   border-radius: 5rem;
   background-color: var(--main-grey);
-}
-.article-source {
-  padding: 0 0.6rem 0.15rem;
 }
 
 .article-date,
 .article-source {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }

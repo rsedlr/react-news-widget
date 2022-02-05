@@ -65,26 +65,26 @@ function NewsWidget() {
   return (
     <div className='news-container' data-testid='news-container'>
       <div className='flex-container'>
-        <h1 className='news-title' style={{}}>
-          News
-        </h1>
-        <div style={{ marginLeft: 'auto', marginTop: 'auto', marginBottom: 'auto' }}>
-          <select
-            name='source'
-            id='source'
-            className='news-dropdown'
-            data-testid='article-dropdown'
-            onChange={setSource}
-          >
-            <option value=''>Filter By Source</option>
-            {Array.from(sources).map((source, i) => {
-              return (
-                <option value={source} key={i} data-testid='dropdown-option'>
-                  {source}
-                </option>
-              );
-            })}
-          </select>
+        <h1 className='news-title'>News</h1>
+        <div className='dropdown-wrapper'>
+          <div className='dropdown-select-arrow-div'>
+            <select
+              name='source'
+              id='source'
+              className='news-dropdown'
+              data-testid='article-dropdown'
+              onChange={setSource}
+            >
+              <option value=''>Filter By Source</option>
+              {Array.from(sources).map((source, i) => {
+                return (
+                  <option value={source} key={i} data-testid='dropdown-option'>
+                    {source}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
       </div>
       <div className='article-container' data-testid='articles'>
@@ -92,6 +92,9 @@ function NewsWidget() {
           const titleSplit = article.title.split(' - '); //
           const articleName = titleSplit.slice(0, -1);
           const source = titleSplit.slice(-1)[0];
+          // Article source is taken from the title (all titles appear to have the actual title and
+          // source separated by a '-'). The source field provided by the API didn't match the design
+          // document as well as this source does. For example, 'Sky News' was 'Sky.com'
 
           if (
             articleCount < resultLimit &&
