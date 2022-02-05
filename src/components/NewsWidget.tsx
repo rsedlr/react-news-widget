@@ -41,24 +41,19 @@ function NewsWidget() {
     return () => {
       isMounted = false;
     };
-  }, []); // only run on mount
+  }, []); // Only run on mount
 
   useEffect(() => {
     const newSources = new Set<string>();
     articles.forEach(article => {
-      newSources.add(article.title.split(' - ').slice(-1)[0]); // not the same as the source we're using in article??
-      // newSources.add(article.source.name); // not the same as the source we're using in article??
+      newSources.add(article.title.split(' - ').slice(-1)[0]);
     });
     setSources(newSources);
-  }, [articles]); // run when articles changed
+  }, [articles]); // Run when articles are changed
 
   const showMore = () => {
     setResultLimit(resultLimit + 5);
   };
-
-  // const setSource = (source: HTMLSelectElement) => {
-  //   setCurrentSource(source.value);
-  // };
 
   const setSource = (event: React.FormEvent<HTMLSelectElement>) => {
     const element = event.target as HTMLSelectElement;

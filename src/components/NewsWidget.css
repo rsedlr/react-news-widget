@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 :root {
   --main-pink: rgb(227, 66, 112);
   --main-grey: rgb(143, 143, 143);
@@ -6,6 +8,7 @@
 }
 
 .news-container {
+  font-family: 'Montserrat';
   max-width: 30rem;
   background-color: var(--background);
   padding: 1rem 2rem;
