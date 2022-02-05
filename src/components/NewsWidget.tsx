@@ -1,23 +1,42 @@
+import { listenerCount } from 'process';
 import React, { useEffect, useState } from 'react';
 import './NewsWidget.css';
 
-// interface Article {
-//   id: string;
-//   type: string;
-//   marketValue: number;
-//   portfolioId: number;
-//   maturityDate?: string;
-// }
+interface Article {
+  source: { id: string; name: string };
+  author: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string;
+  publishedAt: string;
+  content: string;
+}
 
 function NewsWidget() {
-  //   const [assets, setAssets] = useState<Asset[]>([]);
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [sources, setSources] = useState<string[]>([]);
+  const [resultLimit, setResultLimit] = useState(5);
 
   useEffect(() => {
-    // getPortfolio().then(async (portfolio) => {
-    //   fetchData(portfolio.id).then((res) => {
-    //   });
-    // });
+    let isMounted = true;
+    // declare the async data fetching function
+    const fetchNewsData = async () => {
+      // get the data from the api
+      const response = await fetch(
+        `https://newsapi.org/v2/top-headlines?country=gb&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+      );
+      // convert the data to json
+      const json = await response.json();
+      console.log(json.articles);
+      // set state with the result
+      if (isMounted) setArticles(json.articles);
+    };
+
+    fetchNewsData().catch(console.error);
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   return (
@@ -35,14 +54,24 @@ function NewsWidget() {
           </select>
         </div>
       </div>
-      <div className='article-container'>
-        <div className='article'>
-          <h3 className='article-title'>Article title</h3>
-          <div className='flex-container'>
-            <span className='article-date'>4/2/2020</span>
-            <span className='article-source'>source</span>
-          </div>
-        </div>
+      <div className='article-container' data-testid='articles'>
+        {articles.map((article, i) => {
+          if (i < resultLimit) {
+            return (
+              <div className='article' key={i}>
+                <a href={article.url}>
+                  <h3 className='article-title'>{article.title}</h3>
+                </a>
+                <div className='flex-container'>
+                  <span className='article-date'>{article.publishedAt}</span>
+                  <span className='article-source'>{article.source.name}</span>
+                </div>
+              </div>
+            );
+          } else {
+            return null; // ??
+          }
+        })}
       </div>
       <button id='show-more-button' className='news-button'>
         Show More
