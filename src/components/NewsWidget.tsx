@@ -46,7 +46,7 @@ function NewsWidget() {
   };
 
   return (
-    <div className='news-container'>
+    <div className='news-container' data-testid='news-container'>
       <div className='flex-container'>
         <h1 className='news-title' style={{}}>
           News

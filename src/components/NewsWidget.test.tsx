@@ -3,6 +3,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import NewsWidget from './NewsWidget';
 
+async function waitForAPI(articlesContainer: HTMLElement) {
+  // wait for api call to complete
+  await waitFor(() => expect(articlesContainer.childNodes.length).toBeGreaterThan(0), {
+    timeout: 3000, // allow enough time for api call to finish
+  });
+}
+
 test('Correct title present', () => {
   render(<NewsWidget />);
   const title = screen.getByText(/News/i);
@@ -30,16 +37,14 @@ test('0 articles are initially present (before api call)', () => {
 test('5 articles are present after api call', async () => {
   render(<NewsWidget />);
   const articlesContainer = screen.getByTestId('articles');
-  // wait for api call to complete
-  await waitFor(() => expect(articlesContainer.childNodes.length).toBeGreaterThan(0));
+  await waitForAPI(articlesContainer);
   expect(articlesContainer.childNodes.length).toEqual(5);
 });
 
 test('Clicking Show More button should reveal 5 more titles', async () => {
   render(<NewsWidget />);
   const articlesContainer = screen.getByTestId('articles');
-  // wait for api call to complete
-  await waitFor(() => expect(articlesContainer.childNodes.length).toBeGreaterThan(0));
+  await waitForAPI(articlesContainer);
   expect(articlesContainer.childNodes.length).toEqual(5);
 
   const showMoreButton = screen.getByText(/Show More/i);
@@ -50,8 +55,7 @@ test('Clicking Show More button should reveal 5 more titles', async () => {
 test('Dates are in correct format', async () => {
   render(<NewsWidget />);
   const articlesContainer = screen.getByTestId('articles');
-  // wait for api call to complete
-  await waitFor(() => expect(articlesContainer.childNodes.length).toBeGreaterThan(0));
+  await waitForAPI(articlesContainer);
 
   const dates = screen.getAllByTestId('article-date');
   dates.forEach(date => {

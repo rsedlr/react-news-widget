@@ -4,6 +4,6 @@ import App from './App';
 
 test('App contains NewsWidget', () => {
   render(<App />);
-  const newsWidget = screen.getByText(/News/i); // sort out??
+  const newsWidget = screen.getByTestId('news-container');
   expect(newsWidget).toBeInTheDocument();
 });
