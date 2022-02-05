@@ -29,12 +29,13 @@ function NewsWidget() {
       );
 
       const json = await response.json(); // convert the data to json
-      console.log(json.articles);
+      // console.log(json.articles);
 
       if (isMounted) setArticles(json.articles); // set state with the result
     };
 
     fetchNewsData().catch(console.error);
+
     return () => {
       isMounted = false;
     };
@@ -68,7 +69,13 @@ function NewsWidget() {
                 <h3 className='article-title'>{article.title}</h3>
               </a>
               <div className='flex-container'>
-                <span className='article-date'>{article.publishedAt}</span>
+                <span className='article-date' data-testid='article-date'>
+                  {new Date(article.publishedAt).toLocaleDateString('en-gb', {
+                    day: 'numeric',
+                    month: 'numeric',
+                    year: 'numeric',
+                  })}
+                </span>
                 <span className='article-source'>{article.source.name}</span>
               </div>
             </div>
